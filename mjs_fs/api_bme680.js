@@ -1,7 +1,7 @@
 
 let BME680Data = {
     //data
-    _crt_data: ffi('void* mgos_bme680_spi_create()'),
+    _crt_data: ffi('void* mgos_bme680_data_create()'),
     _dlt_data: ffi('void mgos_bme680_data_delete(void*)'),
     _temp: ffi('double mgos_bme680_data_get_temp(void*)'),
     _press: ffi('double mgos_bme680_data_get_press(void*)'),
@@ -53,7 +53,7 @@ let BME680Data = {
 };
 
 let BME680 = {
-    _crt_i2c: ffi('void* mgos_bme680_i2c_create(int)'),
+    _crt_i2c: ffi('void* mgos_bme680_spi_create()'),
     _dlt: ffi('void mgos_bme680_delete(void*)'),
     _read: ffi('int mgos_bme680_read(void*, void*)'),
     MGOS_BME280_ERROR: -128.0,
@@ -63,7 +63,7 @@ let BME680 = {
     // Return value: an object with the methods described below.    
     createI2C: function (address) {
         let obj = Object.create(BME680._proto);
-        obj.bme = BME680._crt_i2c(address);
+        obj.bme = BME680._crt_i2c();
         return obj;
     },
 
